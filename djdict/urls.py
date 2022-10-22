@@ -20,6 +20,9 @@ from django.urls import include, path
 from django.views.decorators.gzip import gzip_page
 from django.views.i18n import JavaScriptCatalog
 
+from django.views.generic import TemplateView
+from django.contrib.auth.views import LogoutView
+
 from dictionary.sitemaps import sitemaps
 
 
@@ -38,6 +41,9 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    path('', TemplateView.as_view(template_name="index.html")),
+    path('accounts/', include('allauth.urls')),
+    path('logout', LogoutView.as_view()),
 ]
 
 # Will consider this near release:

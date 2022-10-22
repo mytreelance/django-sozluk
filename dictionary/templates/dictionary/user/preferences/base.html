@@ -20,8 +20,10 @@
 
     <ul class="settings-nav-mobile collapse list-unstyled bg-light mt-3 rounded" style="font-size: 16px;">
         <li><a class="list-group-item" href="{{ preferences }}">{% trans "preferences" %}</a></li>
+        {% if not user.socialaccount_set.all.0.get_provider %}
         <li><a class="list-group-item" href="{{ password }}">{% trans "password" %}</a></li>
         <li><a class="list-group-item" href="{{ email }}">{% trans "e-mail" %}</a></li>
+        {% endif %}
         <li><a class="list-group-item" href="{{ terminate }}">{% trans "account deletion" %}</a></li>
         <li><a class="list-group-item" href="{{ backup }}">{% trans "backup" %}</a></li>
     </ul>
@@ -32,12 +34,14 @@
         <li class="nav-item">
             <a class="nav-link {% if request.path == preferences %}active{% endif %}" href="{{ preferences }}">{% trans "preferences" %}</a>
         </li>
+        {% if not user.socialaccount_set.all.0.get_provider %}
         <li class="nav-item">
             <a class="nav-link {% if request.path == password %}active{% endif %}" href="{{ password }}">{% trans "password" %}</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {% if request.path == email %}active{% endif %}" href="{{ email }}">{% trans "e-mail" %}</a>
         </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link {% if request.path == terminate %}active{% endif %}" href="{{ terminate }}">{% trans "account deletion" %}</a>
         </li>

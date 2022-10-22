@@ -13,7 +13,8 @@ from django.views.generic import CreateView, FormView, UpdateView
 from dictionary.forms.edit import EntryForm, PreferencesForm
 from dictionary.models import Author, Comment, Entry, Topic
 from dictionary.utils import time_threshold
-
+from allauth.socialaccount.models import SocialAccount
+from django.shortcuts import render
 
 class UserPreferences(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Author
