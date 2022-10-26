@@ -1,5 +1,7 @@
 {% extends "dictionary/base.html" %}
 {% load widget_tweaks functions i18n %}
+{% load socialaccount %}
+
 {% block title %}{% trans "register" context "titleblock" %}{% endblock %}
 
 {% block content %}
@@ -83,4 +85,7 @@
 
         <button onclick="window.scrollTo(0,0);" type="submit" class="btn btn-django stretch my-3">{% trans "register" %}</button>
     </form>
+<p class="d-flex justify-content-center">or</p>
+<a href="{% provider_login_url 'google' %}" type="submit" class="btn btn-django stretch"><img src="https://img.icons8.com/color/16/000000/google-logo.png"> {% trans "register" %} with Google</a>
+
 {% endblock %}

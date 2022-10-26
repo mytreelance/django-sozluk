@@ -1,5 +1,5 @@
 {% extends "dictionary/base.html" %}
-
+{% load static %}
 {% load filters functions i18n %}
 {% block title %}{% print_topic_title %}{% endblock %}
 
@@ -22,13 +22,14 @@
 {% block content %}
 
     {% with valid=topic.valid populated=topic.has_entries banned=topic.is_banned %}
+
     <section class="user_entries" data-topic="{{ topic.title }}">
             {% if topic.exists %}
                 <header class="entry_header">
 
                 <div class="upper">
                 <div class="topic-title">
-                    <h1 class="d-inline m-0"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></h1>
+                    <h1 class="d-inline m-0"><a href="{{ topic.get_absolute_url }}">{{ topic.title }} {% if topic.is_ama == True %}<img src="{% static 'dictionary/img/quest.png'%}" height="15">{% endif %}</a></h1>
                     {% if mode == "search" %}<small>[{% trans "search keywords" %}: <strong>{{ request.GET.keywords.strip }}</strong>]</small>
                     {% elif mode == "links" %}<small><strong>[{% trans "links" %}]</strong></small>
                     {% elif mode == "history" %}<small><strong>[{% trans "today in history" %}: </strong>{{ request.GET.year.strip }}]</small>
@@ -278,7 +279,13 @@
                             <div>
                                 <button type="button" class="btn draft-async px-0" data-title="{{ topic.title }}">{% trans "keep this as draft" %}</button>
                             </div>
-                            <button type="submit" class="btn btn-django-link"{% if user.is_suspended %} title="{% trans "you lack the required permissions." %}" disabled{% endif %}>{% trans "publish" %}</button>
+                            <div class="custom-control custom-checkbox">
+                                {% if not populated %}
+                                <input type="checkbox" name="is_ama" id="is_ama" class="custom-control-input">
+                                <label class="custom-control-label mt-2 mr-4" for="is_ama">Ask me Anything</label>
+                                {% endif %}
+                                <button type="submit" class="btn btn-django-link"{% if user.is_suspended %} title="{% trans "you lack the required permissions." %}" disabled{% endif %}>{% trans "publish" %}</button>
+                            </div>
                         </div>
                     </form>
                 </section>

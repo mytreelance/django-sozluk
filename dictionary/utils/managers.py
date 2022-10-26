@@ -40,7 +40,7 @@ class TopicQueryHandler:
     latest = {"latest": Max("entries__date_created")}  # to order_by("-latest")
 
     # Queryset values
-    values = ("title", "slug")
+    values = ("title", "slug","is_ama")
 
     def today(self, user):
         categories = Q(category__in=user.following_categories.all())

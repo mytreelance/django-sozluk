@@ -23,8 +23,8 @@
         {% if not user.socialaccount_set.all.0.get_provider %}
         <li><a class="list-group-item" href="{{ password }}">{% trans "password" %}</a></li>
         <li><a class="list-group-item" href="{{ email }}">{% trans "e-mail" %}</a></li>
-        {% endif %}
         <li><a class="list-group-item" href="{{ terminate }}">{% trans "account deletion" %}</a></li>
+        {% endif %}
         <li><a class="list-group-item" href="{{ backup }}">{% trans "backup" %}</a></li>
     </ul>
 
@@ -41,10 +41,10 @@
         <li class="nav-item">
             <a class="nav-link {% if request.path == email %}active{% endif %}" href="{{ email }}">{% trans "e-mail" %}</a>
         </li>
-        {% endif %}
         <li class="nav-item">
             <a class="nav-link {% if request.path == terminate %}active{% endif %}" href="{{ terminate }}">{% trans "account deletion" %}</a>
         </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link {% if request.path == backup %}active{% endif %}" href="{{ backup }}">{% trans "backup" %}</a>
         </li>

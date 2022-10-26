@@ -48,8 +48,12 @@
                     <div>
                         <button type="button" class="btn draft-async px-0">{% trans "keep this as draft" %}</button>
                     </div>
+                    <div>
+                                                    <input type="checkbox" name="is_ama" id="is_ama" class="custom-control-input">
+                                <label class="custom-control-label mt-2 mr-4" for="is_ama">Ask me Anything</label>
                     <button type="submit" class="btn btn-django-link"{% if user.is_suspended %} title="{% trans "you lack the required permissions." %}" disabled{% endif %}>{% trans "publish" %}</button>
                 </div>
+                    </div>
             </form>
         </section>
     </section>

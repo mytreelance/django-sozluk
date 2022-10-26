@@ -21,11 +21,16 @@ from dictionary.models import AccountTerminationQueue, Author, BackUp, UserVerif
 from dictionary.utils import get_theme_from_cookie, time_threshold
 from dictionary.utils.email import send_email_confirmation
 from dictionary.utils.mixins import PasswordConfirmMixin
-
+from django.http import HttpResponseRedirect
 
 class Login(LoginView):
     form_class = LoginForm
     template_name = "dictionary/registration/login.html"
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect('/')
+        return super(LoginView, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
         remember_me = form.cleaned_data.get("remember_me", False)
@@ -56,6 +61,11 @@ class Logout(LogoutView):
 class SignUp(FormView):
     form_class = SignUpForm
     template_name = "dictionary/registration/signup.html"
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect('/')
+        return super(SignUp, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
         user = form.save(commit=False)

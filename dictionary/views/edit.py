@@ -82,8 +82,11 @@ class EntryCreateMixin:
                 if not self.topic.valid:
                     notifications.error(self.request, _("curses to such a topic anyway."), extra_tags="persistent")
                     return self.form_invalid(form)
-
-                entry.topic = Topic.objects.create_topic(title=self.topic.title)
+                if self.request.POST.get("is_ama") == "on":
+                    is_ama = True
+                else:
+                    is_ama = False
+                entry.topic = Topic.objects.create_topic(title=self.topic.title,is_ama=is_ama)
 
         entry.save()
         notifications.info(self.request, _("the entry was successfully launched into stratosphere"))

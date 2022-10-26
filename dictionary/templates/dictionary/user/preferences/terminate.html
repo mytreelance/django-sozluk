@@ -51,12 +51,10 @@
                     its too late.
                 {% endblocktrans %}
             </p>
-
             <div class="form-group">
                 <label for="password_confirm">{{ form.password_confirm.label }}</label>
                 {% render_field form.password_confirm class="form-control" id="password_confirm" %}
             </div>
-
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-light w-100">{% trans "farewell" %}</button>
         </form>

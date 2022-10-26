@@ -33,6 +33,8 @@ from dictionary.utils.db import SubQueryCount
 from dictionary.utils.decorators import cached_context
 from dictionary.utils.serializers import ArchiveSerializer
 from dictionary.utils.validators import validate_username_partial
+from allauth.socialaccount.models import SocialAccount
+
 
 
 def usercache(initial_func=None, *, timeout=86400):
@@ -205,6 +207,9 @@ class Author(AbstractUser):
 
         if created:
             self.slug = uuslug(self.username, instance=self)
+            socialapp = SocialAccount.objects.filter(user__id=self.id)
+            if socialapp is not None:
+                self.is_active = True
 
         super().save(*args, **kwargs)
 

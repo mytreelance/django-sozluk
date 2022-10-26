@@ -18,6 +18,44 @@
     <script defer src="{% url 'javascript-catalog' %}"></script>
     <script defer src="{% static 'dictionary/js/dist/index.js' %}"></script>
     <title>{% block supertitle %}{% block title %}{% endblock %} - {{ request.site.name }}{% endblock %}</title>
+    <style>
+        #signup_form > p >  #id_username,#id_email{
+              display: block;
+              width: 100%;
+              height: calc(1.5em + .75rem + 2px);
+              padding: .375rem .75rem;
+              font-size: 1rem;
+              font-weight: 400;
+              line-height: 1.5;
+              color: #495057;
+              background-color: #fff;
+              background-clip: padding-box;
+              border: 1px solid #e3e3e3;
+              border-radius: .25rem;
+              transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            }
+        #signup_form > button{
+            display: inline-block;
+            font-weight: 400;
+            color: var(--text-light);
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            padding: .5em 1em;
+            background: var(--primary-dark);
+            color: #fff;
+            font-size: 1em;
+        }
+    </style>
 </head>
 <body class="{{ request.theme }}{% block bodyclass %}{% endblock %}" {% block bodyattr %}{% endblock %} id="{{ user.is_authenticated|yesno:"au,ua" }}">
 {% include "dictionary/includes/icons.svg" %}

@@ -1,5 +1,5 @@
 {% load filters functions i18n %}
-
+{% load static %}
 {% firstofany left_frame left_frame_fallback as lfproxy %}
 
 {% with lfproxy.context as lf %}
@@ -97,7 +97,7 @@
             {% if lf.page.object_list %}
                 {% for topic in lf.page.object_list %}
                     <li class="list-group-item">
-                        <a href="{{ lf.slug_identifier }}{{ topic.slug }}/{{ lf.parameters }}">{{ topic.title }}<small class="total_entries">{% if topic.count %}{{ topic.count|humanize_count }}{% endif %}</small></a>
+                        <a href="{{ lf.slug_identifier }}{{ topic.slug }}/{{ lf.parameters }}"><span>{{ topic.title }}{% if topic.is_ama == True %}<img src="{% static 'dictionary/img/quest.png'%}" class="ml-2" height="15">{% endif %}</span><small class="total_entries">{% if topic.count %}{{ topic.count|humanize_count }}{% endif %}</small></a>
                     </li>
                 {% endfor %}
             {% else %}
