@@ -32,22 +32,11 @@ ALLOWED_HOSTS = ["*"]
 
 GRAPHENE = {"SCHEMA": "dictionary_graph.schema.schema"}
 
-SITE_ID = 3
-
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    # Django built-in
-    "django.contrib.postgres",
-    "django.contrib.humanize",
     "django.contrib.sites",
-    "django.contrib.flatpages",
-    "django.contrib.sitemaps",
+    
     # Main apps
     "dictionary",
     "django.contrib.admin",
@@ -57,6 +46,19 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "djcelery_email",
     
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    # Django built-in
+    "django.contrib.postgres",
+    "django.contrib.humanize",
+    
+    "django.contrib.flatpages",
+    "django.contrib.sitemaps",
+    
+
     # Google and other providers:
 
     'allauth',
@@ -100,6 +102,13 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "dictionary.utils.context_processors.header_categories",
                 "dictionary.utils.context_processors.left_frame_fallback",
+                
+                # # Required by allauth template tags
+                # "django.core.context_processors.request",
+                # # allauth specific context processors
+                # "allauth.account.context_processors.account",
+                # "allauth.socialaccount.context_processors.socialaccount",
+
             ],
         },
     },
@@ -212,4 +221,6 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+SITE_ID = 4 # 3
