@@ -30,6 +30,8 @@ services:
     user: redis
   celery:
     container_name: sozluk_dev_celery_worker
+    environment:
+      DJANGO_SETTINGS_MODULE: djdict.settings
     env_file:
       - .env
     volumes:
@@ -44,8 +46,12 @@ services:
       - redis
   celery-beat:
     container_name: sozluk_dev_celery_beat
+    environment:
+      DJANGO_SETTINGS_MODULE: djdict.settings
     env_file:
       - .env
+    volumes:
+      - media_volume:/code/media
     build:
       context: .
       dockerfile: Dockerfile.dev
